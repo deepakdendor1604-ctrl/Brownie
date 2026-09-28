@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For You ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #0f1020;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ---------- BACKGROUND ---------- */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 20% 20%, #522c61 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, #252b63 0%, transparent 30%),
+                linear-gradient(135deg, #0f1020, #17182d);
+        }
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeUp 1.5s ease;
+        }
+
+        .small-text {
+            color: #d6b4ff;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #ff8fb3;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #d5d5df;
+            line-height: 1.7;
+        }
+
+        .scroll {
+            margin-top: 50px;
+            color: #aaa;
+            font-size: 13px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        /* ---------- GENERAL ---------- */
+
+        section {
+            max-width: 950px;
+            margin: auto;
+            padding: 100px 25px;
+        }
+
+        .section-title {
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 50px;
+        }
+
+        /* ---------- COUNTDOWN ---------- */
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .time-box {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 10px;
+            border-radius: 18px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .time-box strong {
+            display: block;
+            font-size: 32px;
+            color: #ff9fbd;
+        }
+
+        .time-box span {
+            color: #aaa;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* ---------- MESSAGE ---------- */
+
+        .message-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 45px;
+            line-height: 1.9;
+            font-size: 17px;
+            color: #ddd;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            backdrop-filter: blur(15px);
+        }
+
+        .message-card .highlight {
+            color: #ff9fbd;
+            font-weight: bold;
+        }
+
+        /* ---------- CARDS ---------- */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.09);
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* ---------- SURPRISE ---------- */
+
+        .surprise {
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            background: linear-gradient(135deg, #ff719a, #b56cff);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(255,113,154,0.25);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #secret {
+            display: none;
+            margin: 35px auto 0;
+            max-width: 600px;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #ffd5e1;
+            animation: fadeUp 0.8s ease;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #777;
+        }
+
+        footer span {
+            color: #ff8fb3;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 700px) {
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .message-card {
+                padding: 30px 22px;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="stars">
+    <div class="star" style="top:10%;left:15%"></div>
+    <div class="star" style="top:25%;left:80%"></div>
+    <div class="star" style="top:50%;left:30%"></div>
+    <div class="star" style="top:70%;left:90%"></div>
+    <div class="star" style="top:85%;left:10%"></div>
+    <div class="star" style="top:40%;left:60%"></div>
+    <div class="star" style="top:15%;left:50%"></div>
+</div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-text">
+            A little something for you ❤️
+        </div>
+
+        <h1>
+            Aap kar logi,<br>
+            <span>Meri Pyari Ladki.</span>
+        </h1>
+
+        <p>
+            Exams shuru ho usse phle, Mai chahta hu
+            ki ek chij yaad rakho...
+        </p>
+
+        <div class="scroll">
+            ↓ keep scrolling
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COUNTDOWN -->
+
+<section>
+
+    <h2 class="section-title">
+        The countdown begins 📚
+    </h2>
+
+    <p class="section-subtitle">
+        Exams aane me...
+    </p>
+
+    <div class="countdown">
+
+        <div class="time-box">
+            <strong id="days">--</strong>
+            <span>Days</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="hours">--</strong>
+            <span>Hours</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="minutes">--</strong>
+            <span>Minutes</span>
+        </div>
+
+        <div class="time-box">
+            <strong id="seconds">--</strong>
+            <span>Seconds</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PERSONAL MESSAGE -->
+
+<section>
+
+    <h2 class="section-title">
+        Jab stress hone lage to ise padhna ❤️
+    </h2>
+
+    <p class="section-subtitle">
+        And yes, I'm serious.
+    </p>
+
+    <div class="message-card">
+
+        <p>
+            Don't worry so much about the exams, okay?
+            Mujhe pata hai aapko kabhi kabhi tension hoti hai, par
+            <span class="highlight">you can do this.</span>
+        </p>
+
+        <br>
+
+        <p>
+            Abhi bas ache se prepare karo. Jo bhi time hai,
+            usko properly use karo. Har cheez ek saath perfect
+            karne ki zarurat nahi hai. Step by step padhna,
+            revise karna, aur jo nahi aata usko dobara dekhna.
+        </p>
+
+        <br>
+
+        <p>
+            Aur please khud par unnecessary pressure mat lena.
+            Exam important hai, but <span class="highlight">
+            ek exam tumhari worth decide nahi karta.</span>
+        </p>
+
+        <br>
+
+        <p>
+            Aur agar kabhi kuch chahiye ho, kuch samajh na aaye,
+            ya bas kisi se baat karni ho...
+            <span class="highlight">To hamesha mujhse puch skti ho.</span>
+        </p>
+
+        <br>
+
+        <p>
+            Main yahin hoon.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- THREE THINGS -->
+
+<section>
+
+    <h2 class="section-title">
+        Khali ye chije krna
+    </h2>
+
+    <p class="section-subtitle">
+        Baaki sari chijo ko bhul jao thode time k liye.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">📖</div>
+
+            <h3>Prepare</h3>
+
+            <p>
+                Ache se padhna. Jo topics weak hain unhe
+                time dena. Dheere-dheere sab cover ho jayega.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🧠</div>
+
+            <h3>Don't Panic</h3>
+
+            <p>
+                Agar kabhi lage ki bahut kuch baaki hai,
+                bas ek topic uthao aur start karo.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">🤍</div>
+
+            <h3>Take Care</h3>
+
+            <p>
+                Sleep properly, ache se khana khana, aur bich me breaks bhi leti rhna.
+                Khayal rkhna apna, meri pagal ladki.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SURPRISE -->
+
+<section class="surprise">
+
+    <h2 class="section-title">
+        Ek last chij...
+    </h2>
+
+    <p class="section-subtitle">
+        Ispe click kro ab.
+    </p>
+
+    <button onclick="showSecret()">
+        Open this ❤️
+    </button>
+
+    <div id="secret">
+
+        <p>
+            Exams me perfect nhi de pao to bhi chalega. par..
+        </p>
+
+        <p>
+           Aap apna best dena,
+            take care of yourself,
+            aur yaad rakhna sab kuch akele 
+            sambhalne ki jarurat nhi hai.
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Ab jao padhai karo. 😭📚</strong>
+        </p>
+
+        <p>
+            aur haa... I'm proud of you, meri pyari ladki. ❤️
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    Made with ❤️ for someone special.
+
+    <br><br>
+
+    <span>Now go study. 😌📚</span>
+
+</footer>
+
+
+<script>
+
+    /* -----------------------------
+       CHANGE THIS DATE
+       ----------------------------- */
+
+    const examDate = new Date("2026-10-13T12:00:00");
+    
+
+
+    function updateCountdown() {
+
+        const now = new Date();
+
+        const difference = examDate - now;
+
+        if (difference <= 0) {
+
+            document.getElementById("days").innerText = "0";
+            document.getElementById("hours").innerText = "0";
+            document.getElementById("minutes").innerText = "0";
+            document.getElementById("seconds").innerText = "0";
+
+            return;
+        }
+
+        const days =
+            Math.floor(difference / (1000 * 60 * 60 * 24));
+
+        const hours =
+            Math.floor(
+                (difference / (1000 * 60 * 60)) % 24
+            );
+
+        const minutes =
+            Math.floor(
+                (difference / (1000 * 60)) % 60
+            );
+
+        const seconds =
+            Math.floor(
+                (difference / 1000) % 60
+            );
+
+
+        document.getElementById("days").innerText = days;
+
+        document.getElementById("hours").innerText =
+            String(hours).padStart(2, "0");
+
+        document.getElementById("minutes").innerText =
+            String(minutes).padStart(2, "0");
+
+        document.getElementById("seconds").innerText =
+            String(seconds).padStart(2, "0");
+    }
+
+
+    setInterval(updateCountdown, 1000);
+
+    updateCountdown();
+
+
+    /* -----------------------------
+       SURPRISE MESSAGE
+       ----------------------------- */
+
+    function showSecret() {
+
+        const secret = document.getElementById("secret");
+
+        secret.style.display = "block";
+
+        createHearts();
+    }
+
+
+    /* -----------------------------
+       LITTLE HEART ANIMATION
+       ----------------------------- */
+
+    function createHearts() {
+
+        for (let i = 0; i < 15; i++) {
+
+            const heart = document.createElement("div");
+
+            heart.innerHTML = "❤️";
+
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "%";
+            heart.style.bottom = "0";
+            heart.style.fontSize =
+                (15 + Math.random() * 20) + "px";
+
+            heart.style.pointerEvents = "none";
+
+            heart.style.animation =
+                "floatHeart 3s ease-out forwards";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+    }
+
+</script>
+
+
+<style>
+
+    @keyframes floatHeart {
+
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            transform:
+                translateY(-100vh)
+                rotate(20deg)
+                scale(1.5);
+
+            opacity: 0;
+        }
+
+    }
+
+</style>
+
+</body>
+</html>
